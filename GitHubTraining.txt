@@ -12,9 +12,13 @@ git clone _____web link from git site for repository____
 git add ________.___
 	make sure you have the file in the folder {add to Sandbox means having the physical file in the Sanbox folder}
 git commit -m "___comment___"
+
 git add -A
 	add in all files in folder
 	one comments for all files when commit after the add, to give each file a comment then need to commit after each file added
+
+git push origin master
+	update main Git repository on the site with updated commits
 
 git reset HEAD ________.___
 	stop tracking -> after adding multiple files, no longer want to commit one of them, use command before commit to not include it

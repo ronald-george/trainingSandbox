@@ -1,0 +1,32 @@
+Git - Loading to GitHub itself [primarily to keep code backups and version control]
+Use Command Line or Specialized Application [viewed as not user friendly or with feature bloat] -> Terminal in MAC
+
+git add ________.___
+	make sure you have the file in the folder {add to Sandbox means having the physical file in the Sanbox folder}
+git commit -m "___comment___"
+git add -A
+	add in all files in folder
+	one comments for all files when commit after the add, to give each file a comment then need to commit after each file added
+
+git reset HEAD ________.___
+	stop tracking -> after adding multiple files, no longer want to commit one of them, use command before commit to not include it
+	
+git status 
+	see all added, commited, current status compared to main
+	
+ls
+	list of files in folder
+	
+cd ________
+	go down to selected filename
+	
+cd ..
+	go up to the next higher file 
+
+cd ../..
+	go up to highest file such as main drive
+	
+git add ________ OR git add ______\_____
+	add in folder name in reposirotry-> anything that was updated in that folder
+	OR add in subfolder within a folder on that repository
+	

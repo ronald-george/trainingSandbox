@@ -1,0 +1,410 @@
+Free Trials Include
+5 Product Codes - 5 Copy Streams
+
+PANCE - USPAODT
+NAPLEX - NAPLXODT
+Step 1 HY - USMDHYLT
+Step 2 CK HY - USMED2HYS
+Step 1 Qbank - USMLQBP1S
+
+Enrolled in XXX Product Code AND Enrollment Date (Expiration Date) AND Did NOT Buy a Comprehensive Course AND NOT INSTITUTIONAL =Ê
+
+PANCE & NAPLEX = 1 Day Trial - We only want to email them after the trial to get them to upgrade - Expiration Date = Yesterday
+
+Step 1 HY = 5 Day Trial - With an email going Day 2, Day 4, Day 6.Ê We would need 3 segments, which look back by Product Code And Enrollment Date
+
+Step 2 CK HY = 5 Day Trial - With an email going out on Day 6 after the trial ends, which looks at Product Code and Expiration Date = Yesterday
+
+Step 1 Qbank - 5 Days AFTER Enrollment, send upgrade email.Ê Which looks at Product Code and Enrollment Date
+
+**We will need a list of Comprehensive Products to SUPPRESS Against
+
+QUERY PANCE
+SELECT medm.account_source_name,
+medm.account_is_international,
+medm.interest_product_group,
+medm.interest_product_code,
+medm.interest_date,
+medm.school_name,
+medm.interest_exam_date,
+medm.account_cp_company,
+medm.enrollment_product_code,
+medm.enrollment_status,
+medm.enrollment_sum_fee,
+medm.enrollment_purchase_entry_date,
+medm.enrollment_course_completion_date,
+medm.account_educational_background,
+medm.account_agent_id,
+medm.enrollment_product_group,
+medm.account_id,
+medm.school_grad_year,
+medm.enrollment_product_line_id,
+medm.interest_product_line_id,
+medm.PersonContactid,
+medm.email_opt_out,
+medm.slp_last_opened,
+medm.slp_last_clicked,
+medm.account_email,
+medm.student_Id__c,
+medm.FirstName,
+medm.LastName,
+medm.[Market Id],
+medm.EnrollmentId,
+medm.enrollment_sum_fee2,
+medm.opt_in_date,
+medm.Enrollment_market_id,
+medm.BillingCity,
+medm.BillingState,
+medm.BillingZip,
+medm.id,
+coalesce(medm.Enrollment_market_id,[Market Id]) Functional_market_id
+
+FROM
+(SELECT a.account_source_name,
+a.account_is_international,
+a.interest_product_group,
+a.interest_product_code,
+a.interest_date,
+a.school_name,
+a.interest_exam_date,
+a.account_cp_company,
+a.enrollment_product_code,
+a.enrollment_status,
+a.enrollment_sum_fee,
+a.enrollment_purchase_entry_date,
+a.enrollment_course_completion_date,
+a.account_educational_background,
+a.account_agent_id,
+a.enrollment_product_group,
+a.account_id,
+a.school_grad_year,
+a.enrollment_product_line_id,
+a.interest_product_line_id,
+a.PersonContactid,
+a.email_opt_out,
+a.slp_last_opened,
+a.slp_last_clicked,
+a.account_email,
+a.student_Id__c,
+a.FirstName,
+a.LastName,
+a.[Market Id],
+a.EnrollmentId,
+a.enrollment_sum_fee2,
+a.opt_in_date,
+a.Enrollment_market_id,
+a.BillingCity,
+a.BillingState,
+a.BillingZip,
+a.id
+FROM ENT.[SFDE__0_MDE__KTP__MED__MASTER_MED_ACCOUNT_DE] a
+
+LEFT JOIN ENT.[SFDE__0_MDE__BEHAVIORAL_BASELINE] dbb
+on a.account_email = dbb.PersonEmail
+
+LEFT JOIN ENT.[SFDE__0_MDE__INSTITUTIONAL_SUPPRESSION] inst
+on a.account_email = inst.PersonEmail
+
+WHERE dbb.PersonEmail is null
+AND inst.PersonEmail is null 
+AND a.email_opt_out != 'True'
+AND a.account_email NOT IN (SELECT DISTINCT m.account_email FROM ENT.[SFDE__0_MDE__KTP__MED__MASTER_MED_ACCOUNT_DE] m WHERE m.enrollment_product_code IN ('USPAQBA', 'USPAQB12', 'USPAOD12', 'USPABRVL')))medm
+where medm.enrollment_product_code = 'USPAODT' AND medm.enrollment_course_completion_date = DATEADD(day, -1, CAST(GETDATE() AS date))
+
+QUERY NAPLEX
+SELECT medm.account_source_name,
+medm.account_is_international,
+medm.interest_product_group,
+medm.interest_product_code,
+medm.interest_date,
+medm.school_name,
+medm.interest_exam_date,
+medm.account_cp_company,
+medm.enrollment_product_code,
+medm.enrollment_status,
+medm.enrollment_sum_fee,
+medm.enrollment_purchase_entry_date,
+medm.enrollment_course_completion_date,
+medm.account_educational_background,
+medm.account_agent_id,
+medm.enrollment_product_group,
+medm.account_id,
+medm.school_grad_year,
+medm.enrollment_product_line_id,
+medm.interest_product_line_id,
+medm.PersonContactid,
+medm.email_opt_out,
+medm.slp_last_opened,
+medm.slp_last_clicked,
+medm.account_email,
+medm.student_Id__c,
+medm.FirstName,
+medm.LastName,
+medm.[Market Id],
+medm.EnrollmentId,
+medm.enrollment_sum_fee2,
+medm.opt_in_date,
+medm.Enrollment_market_id,
+medm.BillingCity,
+medm.BillingState,
+medm.BillingZip,
+medm.id,
+coalesce(medm.Enrollment_market_id,[Market Id]) Functional_market_id
+
+FROM
+(SELECT a.account_source_name,
+a.account_is_international,
+a.interest_product_group,
+a.interest_product_code,
+a.interest_date,
+a.school_name,
+a.interest_exam_date,
+a.account_cp_company,
+a.enrollment_product_code,
+a.enrollment_status,
+a.enrollment_sum_fee,
+a.enrollment_purchase_entry_date,
+a.enrollment_course_completion_date,
+a.account_educational_background,
+a.account_agent_id,
+a.enrollment_product_group,
+a.account_id,
+a.school_grad_year,
+a.enrollment_product_line_id,
+a.interest_product_line_id,
+a.PersonContactid,
+a.email_opt_out,
+a.slp_last_opened,
+a.slp_last_clicked,
+a.account_email,
+a.student_Id__c,
+a.FirstName,
+a.LastName,
+a.[Market Id],
+a.EnrollmentId,
+a.enrollment_sum_fee2,
+a.opt_in_date,
+a.Enrollment_market_id,
+a.BillingCity,
+a.BillingState,
+a.BillingZip,
+a.id
+FROM ENT.[SFDE__0_MDE__KTP__MED__MASTER_MED_ACCOUNT_DE] a
+
+LEFT JOIN ENT.[SFDE__0_MDE__BEHAVIORAL_BASELINE] dbb
+on a.account_email = dbb.PersonEmail
+
+LEFT JOIN ENT.[SFDE__0_MDE__INSTITUTIONAL_SUPPRESSION] inst
+on a.account_email = inst.PersonEmail
+
+WHERE dbb.PersonEmail is null
+AND inst.PersonEmail is null 
+AND a.email_opt_out != 'True'
+AND a.account_email NOT IN (SELECT DISTINCT m.account_email FROM ENT.[SFDE__0_MDE__KTP__MED__MASTER_MED_ACCOUNT_DE] m WHERE m.enrollment_product_code IN ('NAPLEXLVO', 'NPLXHY12', 'NAPLXOL1A', 'NAPLXQB12')))medm
+where medm.enrollment_product_code = 'NAPLXODT' AND medm.enrollment_course_completion_date = DATEADD(day, -1, CAST(GETDATE() AS date))
+
+QUERY Step 1 HY - DAY 2
+
+QUERY Step 1 HY - DAY 4
+
+QUERY Step 1 HY - DAY 6
+
+QUERY Step 2 CK HY
+SELECT medm.account_source_name,
+medm.account_is_international,
+medm.interest_product_group,
+medm.interest_product_code,
+medm.interest_date,
+medm.school_name,
+medm.interest_exam_date,
+medm.account_cp_company,
+medm.enrollment_product_code,
+medm.enrollment_status,
+medm.enrollment_sum_fee,
+medm.enrollment_purchase_entry_date,
+medm.enrollment_course_completion_date,
+medm.account_educational_background,
+medm.account_agent_id,
+medm.enrollment_product_group,
+medm.account_id,
+medm.school_grad_year,
+medm.enrollment_product_line_id,
+medm.interest_product_line_id,
+medm.PersonContactid,
+medm.email_opt_out,
+medm.slp_last_opened,
+medm.slp_last_clicked,
+medm.account_email,
+medm.student_Id__c,
+medm.FirstName,
+medm.LastName,
+medm.[Market Id],
+medm.EnrollmentId,
+medm.enrollment_sum_fee2,
+medm.opt_in_date,
+medm.Enrollment_market_id,
+medm.BillingCity,
+medm.BillingState,
+medm.BillingZip,
+medm.id,
+coalesce(medm.Enrollment_market_id,[Market Id]) Functional_market_id
+
+FROM
+(SELECT a.account_source_name,
+a.account_is_international,
+a.interest_product_group,
+a.interest_product_code,
+a.interest_date,
+a.school_name,
+a.interest_exam_date,
+a.account_cp_company,
+a.enrollment_product_code,
+a.enrollment_status,
+a.enrollment_sum_fee,
+a.enrollment_purchase_entry_date,
+a.enrollment_course_completion_date,
+a.account_educational_background,
+a.account_agent_id,
+a.enrollment_product_group,
+a.account_id,
+a.school_grad_year,
+a.enrollment_product_line_id,
+a.interest_product_line_id,
+a.PersonContactid,
+a.email_opt_out,
+a.slp_last_opened,
+a.slp_last_clicked,
+a.account_email,
+a.student_Id__c,
+a.FirstName,
+a.LastName,
+a.[Market Id],
+a.EnrollmentId,
+a.enrollment_sum_fee2,
+a.opt_in_date,
+a.Enrollment_market_id,
+a.BillingCity,
+a.BillingState,
+a.BillingZip,
+a.id
+FROM ENT.[SFDE__0_MDE__KTP__MED__MASTER_MED_ACCOUNT_DE] a
+
+LEFT JOIN ENT.[SFDE__0_MDE__BEHAVIORAL_BASELINE] dbb
+on a.account_email = dbb.PersonEmail
+
+LEFT JOIN ENT.[SFDE__0_MDE__INSTITUTIONAL_SUPPRESSION] inst
+on a.account_email = inst.PersonEmail
+
+WHERE dbb.PersonEmail is null
+AND inst.PersonEmail is null 
+AND a.email_opt_out != 'True'
+AND a.account_email NOT IN (SELECT DISTINCT m.account_email FROM ENT.[SFDE__0_MDE__KTP__MED__MASTER_MED_ACCOUNT_DE] m WHERE m.enrollment_product_code IN ('O1HY203', 'O1HY212', 'O1HY203A', 'O1HY212A', 'USML2OL3', 'USML2OL6')))medm
+where medm.enrollment_product_code = 'USMED2HYS' AND medm.enrollment_course_completion_date = DATEADD(day, -5, CAST(GETDATE() AS date))
+
+QUERY Step 1 Qbank
+SELECT medm.account_source_name,
+medm.account_is_international,
+medm.interest_product_group,
+medm.interest_product_code,
+medm.interest_date,
+medm.school_name,
+medm.interest_exam_date,
+medm.account_cp_company,
+medm.enrollment_product_code,
+medm.enrollment_status,
+medm.enrollment_sum_fee,
+medm.enrollment_purchase_entry_date,
+medm.enrollment_course_completion_date,
+medm.account_educational_background,
+medm.account_agent_id,
+medm.enrollment_product_group,
+medm.account_id,
+medm.school_grad_year,
+medm.enrollment_product_line_id,
+medm.interest_product_line_id,
+medm.PersonContactid,
+medm.email_opt_out,
+medm.slp_last_opened,
+medm.slp_last_clicked,
+medm.account_email,
+medm.student_Id__c,
+medm.FirstName,
+medm.LastName,
+medm.[Market Id],
+medm.EnrollmentId,
+medm.enrollment_sum_fee2,
+medm.opt_in_date,
+medm.Enrollment_market_id,
+medm.BillingCity,
+medm.BillingState,
+medm.BillingZip,
+medm.id,
+coalesce(medm.Enrollment_market_id,[Market Id]) Functional_market_id
+
+FROM
+(SELECT a.account_source_name,
+a.account_is_international,
+a.interest_product_group,
+a.interest_product_code,
+a.interest_date,
+a.school_name,
+a.interest_exam_date,
+a.account_cp_company,
+a.enrollment_product_code,
+a.enrollment_status,
+a.enrollment_sum_fee,
+a.enrollment_purchase_entry_date,
+a.enrollment_course_completion_date,
+a.account_educational_background,
+a.account_agent_id,
+a.enrollment_product_group,
+a.account_id,
+a.school_grad_year,
+a.enrollment_product_line_id,
+a.interest_product_line_id,
+a.PersonContactid,
+a.email_opt_out,
+a.slp_last_opened,
+a.slp_last_clicked,
+a.account_email,
+a.student_Id__c,
+a.FirstName,
+a.LastName,
+a.[Market Id],
+a.EnrollmentId,
+a.enrollment_sum_fee2,
+a.opt_in_date,
+a.Enrollment_market_id,
+a.BillingCity,
+a.BillingState,
+a.BillingZip,
+a.id
+FROM ENT.[SFDE__0_MDE__KTP__MED__MASTER_MED_ACCOUNT_DE] a
+
+LEFT JOIN ENT.[SFDE__0_MDE__BEHAVIORAL_BASELINE] dbb
+on a.account_email = dbb.PersonEmail
+
+LEFT JOIN ENT.[SFDE__0_MDE__INSTITUTIONAL_SUPPRESSION] inst
+on a.account_email = inst.PersonEmail
+
+WHERE dbb.PersonEmail is null
+AND inst.PersonEmail is null 
+AND a.email_opt_out != 'True'
+AND a.account_email NOT IN (SELECT DISTINCT m.account_email FROM ENT.[SFDE__0_MDE__KTP__MED__MASTER_MED_ACCOUNT_DE] m WHERE m.enrollment_product_code IN ('USMED1', 'USMLA12HY', 'USMLEHY3A', 'USMLEHY03', 'USMLQB1A', 'USML1QB12', 'USML1QB15', 'USML1OL3', 'USML1OL6')))medm
+where medm.enrollment_product_code = 'USMLQBP1S' AND medm.enrollment_purchase_entry_date = DATEADD(day, -5, CAST(GETDATE() AS date))
+
+----------------------------------------------------------
+
+PANCE - USPAODT: Suppress against purchasers of USPAQBA, USPAQB12, USPAOD12, USPABRVL
+
+NAPLEX - NAPLXODT: Suppress against purchasers of NAPLEXLVO, NPLXHY12, NAPLXOL1A, NAPLXQB12
+
+Step 1 HY - USMDHYLT: Suppress against purchasers of  'USMED1', 'USMLA12HY', 'USMLEHY3A', 'USMLEHY03', 'USML1OL3', 'USML1OL6'
+
+Step 2 CK HY - USMED2HYS: Suppress against purchasers of O1HY203, O1HY212, O1HY203A, O1HY212A, USML2OL3, USML2OL6
+
+Step 1 Qbank - USMLQBP1S: Suppress against purchasers of USMED1, USMLA12HY, USMLEHY3A, USMLEHY03, USMLQB1A, USML1QB12, USML1QB15, USML1OL3, USML1OL6
+
+-----------------------------------------------------------
+
+a.enrollment_product_code = 'NAPLXODT' AND (TO_DATE(CURRENT_DATE, 'DD-MON-RRRR') - TO_DATE(a.enrollment_purchase_entry_date, 'DD-MON-RRRR')) = 2

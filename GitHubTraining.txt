@@ -1,6 +1,14 @@
 Git - Loading to GitHub itself [primarily to keep code backups and version control]
 Use Command Line or Specialized Application [viewed as not user friendly or with feature bloat] -> Terminal in MAC
 
+git 
+	used to start up bash to enter Git commands
+	from there, go to chosen folder to hold Git repositories cd _____
+
+git clone _____web link from git site for repository____
+	create a directory wtihin folder based on the files in the repository on the Git site
+	then move down to new directory with cd ______
+	
 git add ________.___
 	make sure you have the file in the folder {add to Sandbox means having the physical file in the Sanbox folder}
 git commit -m "___comment___"
